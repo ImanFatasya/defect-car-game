@@ -44,8 +44,6 @@ const Card = ({ flipped, cardDetails, onCardClick, id }) => {
     config: { mass: 5, tension: 500, friction: 80 },
   });
 
-  console.warn(flipped, "flipped");
-
   return (
     <CardContainer
       key={id}
@@ -75,11 +73,11 @@ const Cards = () => {
   const [secondSelection, setSecondSelection] = useState(false);
   const [flippedIndexes, setFlippedIndexes] = useState([]);
 
-  const onCardClick = (i) => {
-    flippedIndexes.length < 2 &&
-      setFlippedIndexes((flippedIndexes) => [...flippedIndexes, i]);
+  console.warn(flippedIndexes);
 
-    console.warn(flippedIndexes, "flipped indexes");
+  const onCardClick = (id) => {
+    flippedIndexes.length < 2 &&
+      setFlippedIndexes((flippedIndexes) => [...flippedIndexes, id]);
   };
 
   useEffect(() => {
@@ -96,20 +94,24 @@ const Cards = () => {
       "#e1e315",
     ];
 
-    const cards = colours.map((colour) => ({
-      colour: colour,
-    }));
-    const pairs = cards.concat(cards);
-    setGameCards(shuffleArray(pairs));
+    const pairs = colours.concat(colours);
+    const shuffledParis = shuffleArray(pairs);
+
+    setGameCards(
+      shuffledParis.map((colour, i) => ({
+        colour: colour,
+        id: colour + '-' + i,
+      }))
+    );
   }, []);
 
-  return gameCards.map((cardDetails, i) => {
+  return gameCards.map((cardDetails,) => {
     return (
       <Card
-        flipped={!!flippedIndexes.find((flippedIndex) => flippedIndex === i)}
+        flipped={!!flippedIndexes.find((flippedIndex) => flippedIndex === cardDetails.id)}
         cardDetails={cardDetails}
         onCardClick={onCardClick}
-        id={i}
+        id={cardDetails.id}
       />
     );
   });
