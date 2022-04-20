@@ -71,14 +71,10 @@ const Cards = () => {
   const [gameCards, setGameCards] = useState([]);
   const [firstSelection, setFirstSelection] = useState(false);
   const [secondSelection, setSecondSelection] = useState(false);
-  const [flippedIndexes, setFlippedIndexes] = useState([]);
+  const [flippedIDs, setflippedIDs] = useState([]);
+  const [matched, setMatched] = useState(false);
 
-  console.warn(flippedIndexes);
-
-  const onCardClick = (id) => {
-    flippedIndexes.length < 2 &&
-      setFlippedIndexes((flippedIndexes) => [...flippedIndexes, id]);
-  };
+  console.warn(flippedIDs);
 
   useEffect(() => {
     const colours = [
@@ -96,19 +92,37 @@ const Cards = () => {
 
     const pairs = colours.concat(colours);
     const shuffledParis = shuffleArray(pairs);
+    const cards = shuffledParis.map((colour, i) => ({
+      colour: colour,
+      id: colour + "-" + i,
+    }));
 
-    setGameCards(
-      shuffledParis.map((colour, i) => ({
-        colour: colour,
-        id: colour + '-' + i,
-      }))
-    );
+    setGameCards(cards);
   }, []);
 
-  return gameCards.map((cardDetails,) => {
+  const onCardClick = (id) => {
+    flippedIDs.length < 2 && setflippedIDs((flippedIDs) => [...flippedIDs, id]);
+    console.warn(id, "id");
+    console.warn(flippedIDs, "FI");
+
+    if (flippedIDs[0].includes(id)) {
+      console.warn("match!");
+    } else {
+      console.log("no match!")
+      const timer = setTimeout(() => {
+        setflippedIDs([]);
+      }, 2000);
+    }
+  };
+
+  // if (flippedIDs[0])
+
+  return gameCards.map((cardDetails) => {
     return (
       <Card
-        flipped={!!flippedIndexes.find((flippedIndex) => flippedIndex === cardDetails.id)}
+        flipped={
+          !!flippedIDs.find((flippedIndex) => flippedIndex === cardDetails.id)
+        }
         cardDetails={cardDetails}
         onCardClick={onCardClick}
         id={cardDetails.id}
