@@ -74,8 +74,6 @@ const Cards = () => {
   const [flippedIDs, setflippedIDs] = useState([]);
   const [matched, setMatched] = useState(false);
 
-  console.warn(flippedIDs);
-
   useEffect(() => {
     const colours = [
       "#FF5733",
@@ -102,13 +100,16 @@ const Cards = () => {
 
   const onCardClick = (id) => {
     flippedIDs.length < 2 && setflippedIDs((flippedIDs) => [...flippedIDs, id]);
-    console.warn(id, "id");
-    console.warn(flippedIDs, "FI");
+    console.log();
 
-    if (flippedIDs[0].includes(id)) {
-      console.warn("match!");
+   
+    const firstCard = gameCards.find((card) => card.id === flippedIDs[0])
+    const secondCard = gameCards.find((card) => card.id === id)
+
+    if (firstCard.colour === secondCard.colour) {
+      setMatched(true)
     } else {
-      console.log("no match!")
+      console.log("no match!");
       const timer = setTimeout(() => {
         setflippedIDs([]);
       }, 2000);
