@@ -48,7 +48,11 @@ const Card = ({ flipped, cardDetails, onCardClick, id }) => {
     <CardContainer
       key={id}
       onClick={() => {
-        onCardClick(id);
+        if (flippedIDs.length === 2 || flippedIDs[0] === id) {
+          return;
+        } else {
+          onCardClick(id, scoreCount, setScoreCount);
+        }
       }}
     >
       <CardBack
