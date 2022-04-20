@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Cards from "./Cards"
+import ScoreCount from "./ScoreCount";
 
 const GameLayout = styled.div`
 display: flex;
@@ -10,7 +11,7 @@ grid-row-gap: 24px;
 `
 
 const Game = () => {
-  return <GameLayout><Cards/></GameLayout>;
+  return <GameLayout><ScoreCount /><Cards/></GameLayout>;
 };
 
 export default Game

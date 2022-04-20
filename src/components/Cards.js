@@ -37,7 +37,15 @@ const CardFront = styled(a.div)`
 
 // const NUMBER_OF_CARDS = 10;
 
-const Card = ({ flipped, cardDetails, onCardClick, id }) => {
+const Card = ({
+  flipped,
+  cardDetails,
+  onCardClick,
+  id,
+  scoreCount,
+  setScoreCount,
+  flippedIDs,
+}) => {
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
@@ -73,10 +81,8 @@ const Card = ({ flipped, cardDetails, onCardClick, id }) => {
 
 const Cards = () => {
   const [gameCards, setGameCards] = useState([]);
-  const [firstSelection, setFirstSelection] = useState(false);
-  const [secondSelection, setSecondSelection] = useState(false);
   const [flippedIDs, setflippedIDs] = useState([]);
-  const [matched, setMatched] = useState(false);
+  const [scoreCount, setScoreCount] = useState(0);
 
   useEffect(() => {
     const colours = [
@@ -102,16 +108,15 @@ const Cards = () => {
     setGameCards(cards);
   }, []);
 
-  const onCardClick = (id) => {
+  const onCardClick = (id, setScoreCount, scoreCount) => {
     flippedIDs.length < 2 && setflippedIDs((flippedIDs) => [...flippedIDs, id]);
-    console.log();
 
-   
-    const firstCard = gameCards.find((card) => card.id === flippedIDs[0])
-    const secondCard = gameCards.find((card) => card.id === id)
+    const firstCard = gameCards.find((card) => card.id === flippedIDs[0]);
+    const secondCard = gameCards.find((card) => card.id === id);
 
     if (firstCard.colour === secondCard.colour) {
-      setMatched(true)
+      setScoreCount(scoreCount + 1);
+      console.warn(scoreCount, "SCORE 2");
     } else {
       console.log("no match!");
       const timer = setTimeout(() => {
@@ -123,6 +128,7 @@ const Cards = () => {
   // if (flippedIDs[0])
 
   return gameCards.map((cardDetails) => {
+    console.warn(scoreCount);
     return (
       <Card
         flipped={
@@ -131,6 +137,9 @@ const Cards = () => {
         cardDetails={cardDetails}
         onCardClick={onCardClick}
         id={cardDetails.id}
+        scoreCount={scoreCount}
+        setScoreCount={setScoreCount}
+        flippedIDs={flippedIDs}
       />
     );
   });
