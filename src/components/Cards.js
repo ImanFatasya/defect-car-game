@@ -73,6 +73,7 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
 const Cards = ({}) => {
   const [gameCards, setGameCards] = useState([]);
   const [flippedIDs, setflippedIDs] = useState([]);
+  const [matchedIDs, setMatchedIDs] = useState([]);
   const increaseScore = useGameStore((state) => state.increaseScore);
 
   useEffect(() => {
@@ -94,6 +95,7 @@ const Cards = ({}) => {
     const cards = shuffledParis.map((colour, i) => ({
       colour: colour,
       id: colour + "-" + i,
+      matched: false,
     }));
 
     setGameCards(cards);
@@ -106,11 +108,13 @@ const Cards = ({}) => {
     const secondCard = gameCards.find((card) => card.id === id);
 
     if (firstCard.colour === secondCard.colour) {
-      increaseScore()
+      increaseScore();
+      setMatchedIDs(() => [...matchedIDs, firstCard.id, secondCard.id]  );
+      setflippedIDs([])
     } else {
       setTimeout(() => {
         setflippedIDs([]);
-      }, 2000);
+      }, 1800);
     }
   };
 
@@ -120,7 +124,9 @@ const Cards = ({}) => {
     return (
       <Card
         flipped={
-          !!flippedIDs.find((flippedIndex) => flippedIndex === cardDetails.id)
+          !!flippedIDs.find(
+            (flippedIndex) => flippedIndex === cardDetails.id
+          ) || !!matchedIDs.find((matched) => matched === cardDetails.id)
         }
         cardDetails={cardDetails}
         onCardClick={onCardClick}

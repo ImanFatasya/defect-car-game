@@ -12,13 +12,13 @@ const GameLayout = styled.div`
 `;
 
 const Game = () => {
-
-
   return (
-    <GameLayout>
-      <ScoreCount score={useGameStore(state => state.score)}  />
-      <Cards />
-    </GameLayout>
+    <>
+      <ScoreCount score={useGameStore((state) => state.score)} />
+      <GameLayout>
+        <Cards />
+      </GameLayout>
+    </>
   );
 };
 
