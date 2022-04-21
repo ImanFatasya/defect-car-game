@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Cards from "./Cards";
 import ScoreCount from "./ScoreCount";
-import create from "zustand";
+import { useGameStore } from "../store";
 
 const GameLayout = styled.div`
   display: flex;
@@ -12,15 +12,11 @@ const GameLayout = styled.div`
 `;
 
 const Game = () => {
-  const useStore = create((set) => ({
-    score: 0,
-    increaseScore: () => set((state) => ({ score: state.score + 1 })),
-    resetScore: () => set({ score: 0 }),
-  }));
+
 
   return (
     <GameLayout>
-      <ScoreCount score={useStore(state => state.score)}  />
+      <ScoreCount score={useGameStore(state => state.score)}  />
       <Cards />
     </GameLayout>
   );

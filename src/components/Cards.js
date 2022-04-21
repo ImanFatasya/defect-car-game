@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useSpring, animated as a } from "react-spring";
+import { useGameStore } from "../store";
 
 const CardContainer = styled.div`
   position: relative;
@@ -49,7 +50,7 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
         if (flippedIDs.length === 2 || flippedIDs[0] === id) {
           return;
         } else {
-          onCardClick(id, );
+          onCardClick(id);
         }
       }}
     >
@@ -69,9 +70,10 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
   );
 };
 
-const Cards = ({  }) => {
+const Cards = ({}) => {
   const [gameCards, setGameCards] = useState([]);
   const [flippedIDs, setflippedIDs] = useState([]);
+  const increaseScore = useGameStore((state) => state.increaseScore);
 
   useEffect(() => {
     const colours = [
@@ -97,15 +99,14 @@ const Cards = ({  }) => {
     setGameCards(cards);
   }, []);
 
-  const onCardClick = (id, ) => {
+  const onCardClick = (id) => {
     flippedIDs.length < 2 && setflippedIDs((flippedIDs) => [...flippedIDs, id]);
 
     const firstCard = gameCards.find((card) => card.id === flippedIDs[0]);
     const secondCard = gameCards.find((card) => card.id === id);
 
     if (firstCard.colour === secondCard.colour) {
-     
-      console.log("match");
+      increaseScore()
     } else {
       setTimeout(() => {
         setflippedIDs([]);
