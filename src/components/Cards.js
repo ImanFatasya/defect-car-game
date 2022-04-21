@@ -49,7 +49,7 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
         if (flippedIDs.length === 2 || flippedIDs[0] === id) {
           return;
         } else {
-          onCardClick(id);
+          onCardClick(id, );
         }
       }}
     >
@@ -69,10 +69,9 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
   );
 };
 
-const Cards = () => {
+const Cards = ({  }) => {
   const [gameCards, setGameCards] = useState([]);
   const [flippedIDs, setflippedIDs] = useState([]);
-  const [score, setScore] = useState(0);
 
   useEffect(() => {
     const colours = [
@@ -98,16 +97,17 @@ const Cards = () => {
     setGameCards(cards);
   }, []);
 
-  const onCardClick = (id) => {
+  const onCardClick = (id, ) => {
     flippedIDs.length < 2 && setflippedIDs((flippedIDs) => [...flippedIDs, id]);
 
     const firstCard = gameCards.find((card) => card.id === flippedIDs[0]);
     const secondCard = gameCards.find((card) => card.id === id);
 
     if (firstCard.colour === secondCard.colour) {
-      setScore(score + 1)
+     
+      console.log("match");
     } else {
-     setTimeout(() => {
+      setTimeout(() => {
         setflippedIDs([]);
       }, 2000);
     }
