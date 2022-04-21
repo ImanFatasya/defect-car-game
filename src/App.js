@@ -7,6 +7,7 @@ function App() {
   return (
     <div className="App">
     <div>
+      
         <h1>Memory Game :)</h1>
         <Game />
       </div>

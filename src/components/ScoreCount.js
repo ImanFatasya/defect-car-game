@@ -1,8 +1,12 @@
-const ScoreCount = ({ score }) => {
+import { useEffect } from "react";
+
+const ScoreCount = ({score}) => {
+
+
   return (
     <div>
       <p>
-        Score:<span>{score}</span>
+        Score:<span>{score ? score : 0}</span>
       </p>
     </div>
   );

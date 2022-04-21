@@ -10,8 +10,8 @@ grid-column-gap: 24px;
 grid-row-gap: 24px;
 `
 
-const Game = () => {
-  return <GameLayout><ScoreCount /><Cards/></GameLayout>;
+const Game = ({score}) => {
+  return <GameLayout><ScoreCount score={score} /><Cards/></GameLayout>;
 };
 
 export default Game

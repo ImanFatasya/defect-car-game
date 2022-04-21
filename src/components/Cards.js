@@ -35,17 +35,7 @@ const CardFront = styled(a.div)`
   background-color: blue;
 `;
 
-// const NUMBER_OF_CARDS = 10;
-
-const Card = ({
-  flipped,
-  cardDetails,
-  onCardClick,
-  id,
-  scoreCount,
-  setScoreCount,
-  flippedIDs,
-}) => {
+const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
@@ -59,7 +49,7 @@ const Card = ({
         if (flippedIDs.length === 2 || flippedIDs[0] === id) {
           return;
         } else {
-          onCardClick(id, scoreCount, setScoreCount);
+          onCardClick(id);
         }
       }}
     >
@@ -82,7 +72,7 @@ const Card = ({
 const Cards = () => {
   const [gameCards, setGameCards] = useState([]);
   const [flippedIDs, setflippedIDs] = useState([]);
-  const [scoreCount, setScoreCount] = useState(0);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     const colours = [
@@ -108,18 +98,16 @@ const Cards = () => {
     setGameCards(cards);
   }, []);
 
-  const onCardClick = (id, setScoreCount, scoreCount) => {
+  const onCardClick = (id) => {
     flippedIDs.length < 2 && setflippedIDs((flippedIDs) => [...flippedIDs, id]);
 
     const firstCard = gameCards.find((card) => card.id === flippedIDs[0]);
     const secondCard = gameCards.find((card) => card.id === id);
 
     if (firstCard.colour === secondCard.colour) {
-      setScoreCount(scoreCount + 1);
-      console.warn(scoreCount, "SCORE 2");
+      setScore(score + 1)
     } else {
-      console.log("no match!");
-      const timer = setTimeout(() => {
+     setTimeout(() => {
         setflippedIDs([]);
       }, 2000);
     }
@@ -128,7 +116,6 @@ const Cards = () => {
   // if (flippedIDs[0])
 
   return gameCards.map((cardDetails) => {
-    console.warn(scoreCount);
     return (
       <Card
         flipped={
@@ -137,8 +124,6 @@ const Cards = () => {
         cardDetails={cardDetails}
         onCardClick={onCardClick}
         id={cardDetails.id}
-        scoreCount={scoreCount}
-        setScoreCount={setScoreCount}
         flippedIDs={flippedIDs}
       />
     );
