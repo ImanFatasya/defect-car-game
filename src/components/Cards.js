@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useSpring, animated as a } from "react-spring";
@@ -20,9 +20,6 @@ const CardBase = css`
   will-change: transform, opacity;
 `;
 
-function shuffleArray(arr) {
-  return arr.sort(() => Math.random() - 0.5);
-}
 
 const CardBack = styled(a.div)`
   ${CardBase};
@@ -70,39 +67,16 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
   );
 };
 
-const Cards = ({}) => {
-  const [gameCards, setGameCards] = useState([]);
+const Cards = ({gameCards}) => {
   const [flippedIDs, setflippedIDs] = useState([]);
   const [matchedIDs, setMatchedIDs] = useState([]);
   const increaseScore = useGameStore((state) => state.increaseScore);
 
-  useEffect(() => {
-    const colours = [
-      "#FF5733",
-      "#350e9e",
-      "#71f9ab",
-      "#78a188",
-      "#41535b",
-      "#fc2ba4",
-      "#89133d",
-      "#e9d1bb",
-      "#ed94be",
-      "#e1e315",
-    ];
 
-    const pairs = colours.concat(colours);
-    const shuffledParis = shuffleArray(pairs);
-    const cards = shuffledParis.map((colour, i) => ({
-      colour: colour,
-      id: colour + "-" + i,
-      matched: false,
-    }));
-
-    setGameCards(cards);
-  }, []);
 
   const onCardClick = (id) => {
-    flippedIDs.length < 2 && setflippedIDs((flippedIDs) => [...flippedIDs, id]);
+
+    flippedIDs.length < 2 && !matchedIDs.find((matchedId) => matchedId === id) && setflippedIDs((flippedIDs) => [...flippedIDs, id]);
 
     const firstCard = gameCards.find((card) => card.id === flippedIDs[0]);
     const secondCard = gameCards.find((card) => card.id === id);
@@ -111,6 +85,7 @@ const Cards = ({}) => {
       increaseScore();
       setMatchedIDs(() => [...matchedIDs, firstCard.id, secondCard.id]  );
       setflippedIDs([])
+      
     } else {
       setTimeout(() => {
         setflippedIDs([]);
