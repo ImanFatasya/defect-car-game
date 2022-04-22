@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
 import Cards from "./Cards";
 import ScoreCount from "./ScoreCount";
 import { useGameStore } from "../store";
@@ -21,12 +20,11 @@ const InactiveGameOverlay = styled.div`
 
 const Game = () => {
   const gameActive = useGameStore((state) => state.gameActive);
-  const startGame = useGameStore((state) => state.setGameActive);
-
+  const startNewGame = useGameStore((state) => state.setNewGame)
 
   return (
     <>
-      <button onClick={() => startGame()}>Start Game!</button>
+      <button onClick={startNewGame}>{gameActive ? "Restart Game" : "Start Game!"}</button>
       <InactiveGameOverlay gameActive={gameActive} />
       <ScoreCount score={useGameStore((state) => state.score)} />
       <GameLayout>

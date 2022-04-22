@@ -25,16 +25,19 @@ const cards = shuffledParis.map((colour, i) => ({
   matched: false,
 }));
 
-console.warn("store code gets run");
 
 const useStore = create((set) => ({
   gameActive: false,
-  setGameActive: () => set({ gameActive: true }),
   setGameOver: () => set({ gameActive: false }),
+  setNewGame: () =>
+    set({
+      cards: shuffleArray(cards),
+      score: 0,
+      gameActive: true
+    }),
   cards: cards,
   score: 0,
   increaseScore: () => set((state) => ({ score: state.score + 1 })),
-  resetScore: () => set({ score: 0 }),
 }));
 
 export const useGameStore = useStore;
