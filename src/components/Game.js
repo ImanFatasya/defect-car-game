@@ -20,15 +20,34 @@ const InactiveGameOverlay = styled.div`
 
 const Game = () => {
   const gameActive = useGameStore((state) => state.gameActive);
-  const startNewGame = useGameStore((state) => state.setNewGame)
+  const setNewGame = useGameStore((state) => state.setNewGame);
+  const gameCards = useGameStore((state) => state.cards);
+  const clearMatchedIDs = useGameStore((state) => state.clearMatchedIDs);
+  const score = useGameStore((state) => state.score);
+  const clearFlippedIDs = useGameStore((state) => state.clearFlippedIDs);
+
+  console.warn(gameActive, "game active");
+  console.warn(score);
 
   return (
     <>
-      <button onClick={startNewGame}>{gameActive ? "Restart Game" : "Start Game!"}</button>
-      <InactiveGameOverlay gameActive={gameActive} />
-      <ScoreCount score={useGameStore((state) => state.score)} />
+      <button
+        onClick={() => {
+          // clearMatchedIDs();
+          clearFlippedIDs();
+          clearMatchedIDs();
+
+          setTimeout(() => {
+            setNewGame();
+          }, 1000);
+        }}
+      >
+        {gameActive ? "Restart Game" : "Start Game!"}
+      </button>
+      {/* <InactiveGameOverlay gameActive={gameActive} /> */}
+      <ScoreCount score={score} />
       <GameLayout>
-        <Cards gameCards={useGameStore((state) => state.cards)} />
+        <Cards gameCards={gameCards} />
       </GameLayout>
     </>
   );
