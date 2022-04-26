@@ -4,7 +4,6 @@ import ScoreCount from "./ScoreCount";
 import { useGameStore } from "../store";
 
 const Container = styled.div`
-  /* max-width: 1070px */
   margin: auto;
   height: 100%;
   max-height: 90vh;
@@ -32,12 +31,6 @@ const GameLayout = styled.div`
   margin: auto;
 `;
 
-const InactiveGameOverlay = styled.div`
-  height: 100vh;
-  width: 100vh;
-  background-color: white;
-  display: ${(props) => (props.gameActive ? "none" : "block")};
-`;
 
 const Button = styled.button`
   background-color: cornflowerblue;
@@ -55,9 +48,7 @@ const Game = () => {
   const score = useGameStore((state) => state.score);
   const clearFlippedIDs = useGameStore((state) => state.clearFlippedIDs);
 
-  console.warn(gameActive, "game active");
-  console.warn(score);
-
+ 
   return (
     <Container>
       <Header>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useSpring, animated as a } from "react-spring";
@@ -44,7 +43,7 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
     <CardContainer
       key={id}
       onClick={() => {
-        //create disabled prop on card are move this outside
+        //TODO: create disabled prop on card are move this outside
         if (flippedIDs.length === 2 || flippedIDs[0] === id) {
           return;
         } else {
@@ -76,7 +75,6 @@ const Cards = ({ gameCards }) => {
   const setMatchedIDs = useGameStore((state) => state.setMatchedIDs);
   const matchedIDs = useGameStore((state) => state.matchedIDs);
 
-  console.warn(gameCards, "cards");
 
   const onCardClick = (id) => {
     flippedIDs.length < 2 &&
@@ -97,7 +95,6 @@ const Cards = ({ gameCards }) => {
     }
   };
 
-  // if (flippedIDs[0])
 
   return gameCards.map((cardDetails) => {
     return (
