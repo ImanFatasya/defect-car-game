@@ -1,11 +1,15 @@
 import { useEffect } from "react";
+import styled from "@emotion/styled";
 
-const ScoreCount = ({score}) => {
+const Number = styled.span`
+  padding-left: 4px;
+`;
 
+const ScoreCount = ({ score }) => {
   return (
     <div>
       <p>
-        Score:<span>{score}</span>
+        Score:<Number>{score}</Number>
       </p>
     </div>
   );

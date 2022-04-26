@@ -3,12 +3,27 @@ import Cards from "./Cards";
 import ScoreCount from "./ScoreCount";
 import { useGameStore } from "../store";
 
+const Container = styled.div`
+  max-width: 978px;
+  margin: auto;
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px 0 24px;
+`;
+
 const GameLayout = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   grid-column-gap: 24px;
   grid-row-gap: 24px;
+  justify-content: center;
+  max-width: 1088px;
+  margin: auto;
 `;
 
 const InactiveGameOverlay = styled.div`
@@ -16,6 +31,14 @@ const InactiveGameOverlay = styled.div`
   width: 100vh;
   background-color: white;
   display: ${(props) => (props.gameActive ? "none" : "block")};
+`;
+
+const Button = styled.button`
+  background-color: cornflowerblue;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
 `;
 
 const Game = () => {
@@ -30,26 +53,28 @@ const Game = () => {
   console.warn(score);
 
   return (
-    <>
-      <button
-        onClick={() => {
-          // clearMatchedIDs();
-          clearFlippedIDs();
-          clearMatchedIDs();
+    <Container>
+      <Header>
+        <Button
+          onClick={() => {
+            clearFlippedIDs();
+            clearMatchedIDs();
 
-          setTimeout(() => {
-            setNewGame();
-          }, 1000);
-        }}
-      >
-        {gameActive ? "Restart Game" : "Start Game!"}
-      </button>
-      {/* <InactiveGameOverlay gameActive={gameActive} /> */}
-      <ScoreCount score={score} />
+            setTimeout(() => {
+              setNewGame();
+            }, 1000);
+          }}
+        >
+          {gameActive ? "Restart Game" : "Start Game"}
+        </Button>
+        <h1>Memory Game</h1>
+
+        <ScoreCount score={score} />
+      </Header>
       <GameLayout>
         <Cards gameCards={gameCards} />
       </GameLayout>
-    </>
+    </Container>
   );
 };
 

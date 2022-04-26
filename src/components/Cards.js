@@ -29,7 +29,7 @@ const CardBack = styled(a.div)`
 const CardFront = styled(a.div)`
   ${CardBase};
   background-size: cover;
-  background-color: blue;
+  background-image: url("../assets/memory-game-react/src/assets/omar-flores-lQT_bOWtysE-unsplash.jpg");
 `;
 
 const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {

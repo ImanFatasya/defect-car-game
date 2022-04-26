@@ -1,14 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 import styled from "@emotion/styled";
 import Game from "../src/components/Game";
 
 function App() {
   return (
     <div className="App">
-    <div>
-      
-        <h1>Memory Game :)</h1>
+      <div>
         <Game />
       </div>
     </div>
