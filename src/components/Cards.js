@@ -3,17 +3,18 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useSpring, animated as a } from "react-spring";
 import { useGameStore } from "../store";
+import CardBackgroundImage from "../assets/bia-andrade-PO8Woh4YBD8-unsplash.jpg"
 
 const CardContainer = styled.div`
   position: relative;
-  width: 175px;
-  height: 175px;
+  width: 150px;
+  height: 150px;
 `;
 
 const CardBase = css`
   position: absolute;
-  max-width: 160px;
-  max-height: 160px;
+  max-width: 150px;
+  max-height: 150px;
   width: 50ch;
   height: 50ch;
   cursor: pointer;
@@ -29,7 +30,7 @@ const CardBack = styled(a.div)`
 const CardFront = styled(a.div)`
   ${CardBase};
   background-size: cover;
-  background-image: url("../assets/memory-game-react/src/assets/omar-flores-lQT_bOWtysE-unsplash.jpg");
+  background-image: url(${CardBackgroundImage});
 `;
 
 const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {

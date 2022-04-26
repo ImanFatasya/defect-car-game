@@ -15,7 +15,6 @@ function generateCards() {
     "#89133d",
     "#e9d1bb",
     "#ed94be",
-    "#e1e315",
   ];
 
   const pairs = colours.concat(colours);

@@ -4,8 +4,10 @@ import ScoreCount from "./ScoreCount";
 import { useGameStore } from "../store";
 
 const Container = styled.div`
-  max-width: 978px;
+  /* max-width: 1070px */
   margin: auto;
+  height: 100%;
+  max-height: 90vh;
 `;
 
 const Header = styled.div`
@@ -13,16 +15,20 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 24px 0 24px;
+  max-width: 1020px;
+  margin: auto;
 `;
 
 const GameLayout = styled.div`
   display: flex;
   flex-wrap: wrap;
+  
+  max-width: 1070px;
   width: 100%;
   grid-column-gap: 24px;
   grid-row-gap: 24px;
   justify-content: center;
-  max-width: 1088px;
+  padding-top: 24px;
   margin: auto;
 `;
 
