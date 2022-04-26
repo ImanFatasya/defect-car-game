@@ -47,10 +47,7 @@ const useStore = create((set) => ({
     set((state) => ({
       matchedIDs: [...state.matchedIDs, firstMatchedID, secondMatchedID],
     })),
-  clearMatchedIDs: () =>
-    set({
-      matchedIDs: [],
-    }),
+  clearMatchedIDs: () => set({ matchedIDs: [] }),
 }));
 
 export const useGameStore = useStore;
