@@ -62,7 +62,7 @@ const Game = () => {
             }, 1000);
           }}
         >
-          {gameActive ? "Restart Game" : "Start Game"}
+          Restart Game
         </Button>
         <h1>Memory Game</h1>
 
