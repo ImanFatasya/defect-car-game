@@ -4,6 +4,7 @@ const Number = styled.span`
   padding-left: 4px;
 `;
 
+
 const ScoreCount = ({ score }) => {
   return (
     <div>

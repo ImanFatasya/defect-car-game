@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useSpring, animated as a } from "react-spring";
 import { useGameStore } from "../store";
-import CardBackgroundImage from "../assets/bia-andrade-PO8Woh4YBD8-unsplash.jpg"
+import CardBackgroundImage from "../assets/bia-andrade-PO8Woh4YBD8-unsplash.jpg";
 
 const CardContainer = styled.div`
   position: relative;
@@ -38,13 +38,14 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
     config: { mass: 5, tension: 500, friction: 80 },
   });
+  const isDisabled = flippedIDs[0] === id;
 
   return (
     <CardContainer
       key={id}
       onClick={() => {
         //TODO: create disabled prop on card are move this outside
-        if (flippedIDs.length === 2 || flippedIDs[0] === id) {
+        if (isDisabled) {
           return;
         } else {
           onCardClick(id);
@@ -75,26 +76,31 @@ const Cards = ({ gameCards }) => {
   const setMatchedIDs = useGameStore((state) => state.setMatchedIDs);
   const matchedIDs = useGameStore((state) => state.matchedIDs);
 
-
   const onCardClick = (id) => {
-    flippedIDs.length < 2 &&
-      !matchedIDs.find((matchedId) => matchedId === id) &&
-      setFlippedIDs(id);
+    //check if two cards have been flipped and that the card clicked on hasn't already been matched
+    // flippedIDs.length === 2 && setFlippedIDs([]);
+    flippedIDs.length === 2 && flippedIDs.splice(0, 2);
+
+    //if the card hasn't already been matched, add the id to flippedIDs
+    !matchedIDs.find((matchedId) => matchedId === id) && setFlippedIDs(id);
 
     const firstCard = gameCards.find((card) => card.id === flippedIDs[0]);
     const secondCard = gameCards.find((card) => card.id === id);
 
-    if (firstCard.colour === secondCard.colour) {
+    const isMatched = firstCard.colour === secondCard.colour;
+
+    if (isMatched) {
       increaseScore();
       setMatchedIDs(firstCard.id, secondCard.id);
       clearFlippedIDs();
+      
     } else {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         clearFlippedIDs();
       }, 1800);
+      clearTimeout(timer)
     }
   };
-
 
   return gameCards.map((cardDetails) => {
     return (
