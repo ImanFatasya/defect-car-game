@@ -38,14 +38,13 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
     config: { mass: 5, tension: 500, friction: 80 },
   });
-  const isDisabled = flippedIDs[0] === id;
 
   return (
     <CardContainer
       key={id}
       onClick={() => {
         //TODO: create disabled prop on card are move this outside
-        if (isDisabled) {
+        if (flippedIDs.length === 2 || flippedIDs[0] === id) {
           return;
         } else {
           onCardClick(id);
@@ -82,7 +81,11 @@ const Cards = ({ gameCards }) => {
       !matchedIDs.find((matchedId) => matchedId === id) &&
       setFlippedIDs(id);
 
-    
+    //the next steps are for determining card match, so early return if only one card has been flipped
+    if (flippedIDs.length < 1) {
+      return;
+    }
+
     //get the first and second flipped cards
     const firstCard = gameCards.find((card) => card.id === flippedIDs[0]);
     const secondCard = gameCards.find((card) => card.id === id);
@@ -92,7 +95,6 @@ const Cards = ({ gameCards }) => {
       setMatchedIDs(firstCard.id, secondCard.id);
       //unflip the cards
       clearFlippedIDs();
-      
     } else {
       //if no match, unflip the cards
       setTimeout(() => {
