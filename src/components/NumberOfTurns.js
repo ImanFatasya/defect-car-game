@@ -5,14 +5,14 @@ const Number = styled.span`
 `;
 
 
-const ScoreCount = ({ score }) => {
+const NumberOfTurns = ({ numberOfTurns }) => {
   return (
     <div>
       <p>
-        Score:<Number>{score}</Number>
+        Number of turns:<Number>{numberOfTurns}</Number>
       </p>
     </div>
   );
 };
 
-export default ScoreCount;
+export default NumberOfTurns;

@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import Cards from "./Cards";
-import ScoreCount from "./ScoreCount";
+import NumberOfTurns from "./NumberOfTurns";
 import { useGameStore } from "../store";
 import "../App.css";
-import { useEffect } from "react";
+import { ReactConfetti } from "../components/Confetti";
 
 const Container = styled.div`
   margin: auto;
@@ -61,14 +61,13 @@ const Scrim = styled.div`
 const Game = () => {
   const gameActive = useGameStore((state) => state.gameActive);
   const gameCards = useGameStore((state) => state.cards);
-  const score = useGameStore((state) => state.score);
+  const numberOfTurns = useGameStore((state) => state.numberOfTurns);
   const matchedIDs = useGameStore((state) => state.matchedIDs);
 
   const setNewGame = useGameStore((state) => state.setNewGame);
   const setEndGame = useGameStore((state) => state.setEndGame);
-  
-  
-  const gameOver = matchedIDs.length === gameCards.length; 
+
+  const gameOver = matchedIDs.length === gameCards.length;
   const showScrim = gameOver || !gameActive;
 
   return (
@@ -82,8 +81,9 @@ const Game = () => {
           {gameActive && !gameOver ? "End Game" : "Start Game"}
         </Button>
         <h1>Memory Game</h1>
-        <ScoreCount score={score} />
+        <NumberOfTurns numberOfTurns={numberOfTurns} />
       </Header>
+
       <GameLayout>
         <Cards gameCards={gameCards} />
       </GameLayout>
@@ -95,6 +95,7 @@ const Game = () => {
           className="gameOverAnimation"
         >
           <span>{gameOver ? "You Win!" : "Click anywhere to start"}</span>
+          {gameOver ? <ReactConfetti /> : null}
         </Scrim>
       )}
     </Container>

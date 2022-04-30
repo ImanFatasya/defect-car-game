@@ -68,7 +68,9 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
 };
 
 const Cards = ({ gameCards }) => {
-  const increaseScore = useGameStore((state) => state.increaseScore);
+  const increaseNumberOfTurns = useGameStore(
+    (state) => state.increaseNumberOfTurns
+  );
   const setFlippedIDs = useGameStore((state) => state.setFlippedIDs);
   const flippedIDs = useGameStore((state) => state.flippedIDs);
   const clearFlippedIDs = useGameStore((state) => state.clearFlippedIDs);
@@ -79,7 +81,7 @@ const Cards = ({ gameCards }) => {
     //if less than two card have been flipped, add the card id to the flipped array for flipping (stops a third, fourth... card from flipping)
     flippedIDs.length < 2 &&
       !matchedIDs.find((matchedId) => matchedId === id) &&
-      setFlippedIDs(id);
+      setFlippedIDs(id) 
 
     //the next steps are for determining card match, so early return if only one card has been flipped
     if (flippedIDs.length < 1) {
@@ -91,14 +93,16 @@ const Cards = ({ gameCards }) => {
     const secondCard = gameCards.find((card) => card.id === id);
     //determine if the cards match
     if (firstCard.colour === secondCard.colour) {
-      increaseScore();
       setMatchedIDs(firstCard.id, secondCard.id);
       //unflip the cards
       clearFlippedIDs();
+      increaseNumberOfTurns();
     } else {
       //if no match, unflip the cards
       setTimeout(() => {
         clearFlippedIDs();
+        increaseNumberOfTurns();
+
       }, 1200);
     }
   };

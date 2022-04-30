@@ -38,7 +38,7 @@ const useStore = create((set) => ({
   setEndGame: () =>
     set({
       matchedIDs: [],
-      score: 0,
+      numberOfTurns: 0,
       gameActive: false,
     }),
   cards: [],
@@ -46,13 +46,14 @@ const useStore = create((set) => ({
   setFlippedIDs: (flippedID) =>
     set((state) => ({ flippedIDs: [...state.flippedIDs, flippedID] })),
   clearFlippedIDs: () => set({ flippedIDs: [] }),
-  score: 0,
-  increaseScore: () => set((state) => ({ score: state.score + 1 })),
+  numberOfTurns: 0,
+  increaseNumberOfTurns: () => set((state) => ({ numberOfTurns: state.numberOfTurns + 1 })),
   matchedIDs: [],
   setMatchedIDs: (firstMatchedID, secondMatchedID) =>
     set((state) => ({
       matchedIDs: [...state.matchedIDs, firstMatchedID, secondMatchedID],
     })),
+ 
 }));
 
 export const useGameStore = useStore;
