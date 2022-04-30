@@ -82,11 +82,7 @@ const Cards = ({ gameCards }) => {
       !matchedIDs.find((matchedId) => matchedId === id) &&
       setFlippedIDs(id);
 
-    //the next steps are for determining card match, so early return if only one card has been flipped
-    if (flippedIDs.length < 1) {
-      return;
-    }
-
+    
     //get the first and second flipped cards
     const firstCard = gameCards.find((card) => card.id === flippedIDs[0]);
     const secondCard = gameCards.find((card) => card.id === id);
