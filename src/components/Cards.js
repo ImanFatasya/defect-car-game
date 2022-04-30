@@ -77,28 +77,31 @@ const Cards = ({ gameCards }) => {
   const matchedIDs = useGameStore((state) => state.matchedIDs);
 
   const onCardClick = (id) => {
-    //check if two cards have been flipped and that the card clicked on hasn't already been matched
-    // flippedIDs.length === 2 && setFlippedIDs([]);
-    flippedIDs.length === 2 && flippedIDs.splice(0, 2);
+    //if less than two card have been flipped, add the card id to the flipped array for flipping (stops a third, fourth... card from flipping)
+    flippedIDs.length < 2 &&
+      !matchedIDs.find((matchedId) => matchedId === id) &&
+      setFlippedIDs(id);
 
-    //if the card hasn't already been matched, add the id to flippedIDs
-    !matchedIDs.find((matchedId) => matchedId === id) && setFlippedIDs(id);
+    //the next steps are for determining card match, so early return if only one card has been flipped
+    if (flippedIDs.length < 1) {
+      return;
+    }
 
+    //get the first and second flipped cards
     const firstCard = gameCards.find((card) => card.id === flippedIDs[0]);
     const secondCard = gameCards.find((card) => card.id === id);
-
-    const isMatched = firstCard.colour === secondCard.colour;
-
-    if (isMatched) {
+    //determine if the cards match
+    if (firstCard.colour === secondCard.colour) {
       increaseScore();
       setMatchedIDs(firstCard.id, secondCard.id);
+      //unflip the cards
       clearFlippedIDs();
       
     } else {
-      const timer = setTimeout(() => {
+      //if no match, unflip the cards
+      setTimeout(() => {
         clearFlippedIDs();
-      }, 1800);
-      clearTimeout(timer)
+      }, 1200);
     }
   };
 

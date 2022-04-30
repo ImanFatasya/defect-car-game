@@ -19,6 +19,8 @@ function generateCards() {
 
   const pairs = colours.concat(colours);
   const shuffledParis = shuffleArray(pairs);
+  console.log("shuffling in Zustand");
+
   return shuffledParis.map((colour, i) => ({
     colour: colour,
     id: colour + "-" + i,
@@ -28,13 +30,18 @@ function generateCards() {
 
 const useStore = create((set) => ({
   gameActive: false,
-  setNewGame: () =>
+  setNewGame: () => 
+  set({
+    gameActive: true,
+    cards: generateCards()
+  }),
+  setEndGame: () =>
     set({
+      matchedIDs: [],
       score: 0,
-      cards: generateCards(),
-      gameActive: true,
+      gameActive: false,
     }),
-  cards: generateCards(),
+  cards: [],
   flippedIDs: [],
   setFlippedIDs: (flippedID) =>
     set((state) => ({ flippedIDs: [...state.flippedIDs, flippedID] })),
@@ -46,7 +53,6 @@ const useStore = create((set) => ({
     set((state) => ({
       matchedIDs: [...state.matchedIDs, firstMatchedID, secondMatchedID],
     })),
-  clearMatchedIDs: () => set({ matchedIDs: [] }),
 }));
 
 export const useGameStore = useStore;
