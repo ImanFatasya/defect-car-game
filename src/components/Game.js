@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import Cards from "./Cards";
 import ScoreCount from "./ScoreCount";
 import { useGameStore } from "../store";
-import "../App.css"
-
+import "../App.css";
+import { useEffect } from "react";
 
 const Container = styled.div`
   margin: auto;
@@ -39,14 +39,20 @@ const Button = styled.button`
   border-radius: 10px;
   padding: 10px;
   color: white;
+  z-index: 1;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #2559b7;
+  }
 `;
 
-const GameWon = styled.div`
+const Scrim = styled.div`
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0; 
+  right: 0;
   background-color: #c9cbca9e;
   justify-content: center;
   align-items: center;
@@ -54,35 +60,43 @@ const GameWon = styled.div`
 
 const Game = () => {
   const gameActive = useGameStore((state) => state.gameActive);
-  const setNewGame = useGameStore((state) => state.setNewGame);
   const gameCards = useGameStore((state) => state.cards);
-  const clearMatchedIDs = useGameStore((state) => state.clearMatchedIDs);
   const score = useGameStore((state) => state.score);
-  const clearFlippedIDs = useGameStore((state) => state.clearFlippedIDs);
+  const matchedIDs = useGameStore((state) => state.matchedIDs);
+
+  const setNewGame = useGameStore((state) => state.setNewGame);
+  const setEndGame = useGameStore((state) => state.setEndGame);
+  
+  
+  const gameOver = matchedIDs.length === gameCards.length; 
+  const showScrim = gameOver || !gameActive;
 
   return (
     <Container>
       <Header>
         <Button
           onClick={() => {
-            clearFlippedIDs();
-            clearMatchedIDs();
-
-            setTimeout(() => {
-              setNewGame();
-            }, 1000);
+            gameActive ? setEndGame() : setNewGame();
           }}
         >
-          Restart Game
+          {gameActive && !gameOver ? "End Game" : "Start Game"}
         </Button>
         <h1>Memory Game</h1>
-
         <ScoreCount score={score} />
       </Header>
       <GameLayout>
         <Cards gameCards={gameCards} />
       </GameLayout>
-      <GameWon className="gameOverAnimation"><span>You Win!</span></GameWon>
+      {showScrim && (
+        <Scrim
+          onClick={() => {
+            setNewGame();
+          }}
+          className="gameOverAnimation"
+        >
+          <span>{gameOver ? "You Win!" : "Click anywhere to start"}</span>
+        </Scrim>
+      )}
     </Container>
   );
 };

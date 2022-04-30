@@ -99,7 +99,7 @@ const Cards = ({ gameCards }) => {
       //if no match, unflip the cards
       setTimeout(() => {
         clearFlippedIDs();
-      }, 1800);
+      }, 1200);
     }
   };
 
