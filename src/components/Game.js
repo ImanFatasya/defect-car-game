@@ -84,7 +84,7 @@ const Game = () => {
       <Header>
         <Button
           onClick={() => {
-            !gameComplete ? setNewGame() : setEndGame();
+            gameComplete ? setNewGame() : setEndGame();
           }}
         >
           {gameComplete ? "Start New Game" : "End Game"}

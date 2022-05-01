@@ -8,14 +8,7 @@ function shuffleArray(arr) {
 function generateCards() {
   const colours = [
     "#FF5733",
-    "#350e9e",
-    "#71f9ab",
-    "#78a188",
-    "#41535b",
-    "#fc2ba4",
-    "#89133d",
-    "#e9d1bb",
-    "#ed94be",
+
   ];
 
   const pairs = colours.concat(colours);
@@ -39,8 +32,7 @@ const useStore = create(
       numberOfTurns: 0,
       matchedIDs: [],
       highScore: 0,
-     
-   
+
       setNewGame: () =>
         set({
           gameActive: true,
@@ -52,26 +44,20 @@ const useStore = create(
           numberOfTurns: 0,
           gameActive: false,
         }),
-      cards: [],
-      flippedIDs: [],
       setFlippedIDs: (flippedID) =>
         set((state) => ({ flippedIDs: [...state.flippedIDs, flippedID] })),
       clearFlippedIDs: () => set({ flippedIDs: [] }),
-      numberOfTurns: 0,
       increaseNumberOfTurns: () =>
         set((state) => ({ numberOfTurns: state.numberOfTurns + 1 })),
-      matchedIDs: [],
       setMatchedIDs: (firstMatchedID, secondMatchedID) =>
         set((state) => ({
           matchedIDs: [...state.matchedIDs, firstMatchedID, secondMatchedID],
         })),
-      highScore: 0,
       setHighScore: (numberOfTurns) => set({ highScore: numberOfTurns }),
-      gameComplete: false,
       setGameComplete: () => set({ gameComplete: true, gameActive: false }),
     }),
     {
-      name: "ame-storage", // unique name
+      name: "ggggame-storage", // unique name
     }
   )
 );
