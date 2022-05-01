@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
 import Cards from "./Cards";
 import NumberOfTurns from "./NumberOfTurns";
+import HighScore from "./HighScore";
 import { useGameStore } from "../store";
 import "../App.css";
 import { ReactConfetti } from "../components/Confetti";
+import { useEffect } from "react";
 
 const Container = styled.div`
   margin: auto;
@@ -63,25 +65,32 @@ const Game = () => {
   const gameCards = useGameStore((state) => state.cards);
   const numberOfTurns = useGameStore((state) => state.numberOfTurns);
   const matchedIDs = useGameStore((state) => state.matchedIDs);
-
+  const highScore = useGameStore((state) => state.highScore);
+  const setHighScore = useGameStore((state) => state.setHighScore);
   const setNewGame = useGameStore((state) => state.setNewGame);
   const setEndGame = useGameStore((state) => state.setEndGame);
 
   const gameOver = matchedIDs.length === gameCards.length;
   const showScrim = gameOver || !gameActive;
 
+  if (gameOver && numberOfTurns > highScore) {
+    console.warn(numberOfTurns > highScore)
+    setHighScore(numberOfTurns);
+  }
+  console.warn("high score", highScore);
   return (
     <Container>
       <Header>
         <Button
           onClick={() => {
-            gameActive ? setEndGame() : setNewGame();
+            gameOver || !gameActive ? setNewGame() : setEndGame();
           }}
         >
-          {gameActive && !gameOver ? "End Game" : "Start Game"}
+          {gameOver || !gameActive ? "Start New Game" : "End Game"}
         </Button>
         <h1>Memory Game</h1>
         <NumberOfTurns numberOfTurns={numberOfTurns} />
+        <HighScore highScore={highScore} />
       </Header>
 
       <GameLayout>
@@ -90,12 +99,14 @@ const Game = () => {
       {showScrim && (
         <Scrim
           onClick={() => {
-            setNewGame();
+            {
+              gameOver ? setEndGame() : setNewGame();
+            }
           }}
           className="gameOverAnimation"
         >
           <span>{gameOver ? "You Win!" : "Click anywhere to start"}</span>
-          {gameOver ? <ReactConfetti /> : null}
+          {gameOver ? <ReactConfetti /> : <></>}
         </Scrim>
       )}
     </Container>

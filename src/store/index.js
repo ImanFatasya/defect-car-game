@@ -1,5 +1,8 @@
 import create from "zustand";
 
+const getLocalStorage = (key) => JSON.parse(window.localStorage.getItem(key))
+const setLocalStorage = (key, value) => window.localStorage.setItem(key, JSON.stringify(value)) 
+
 function shuffleArray(arr) {
   return arr.sort(() => Math.random() - 0.5);
 }
@@ -53,7 +56,9 @@ const useStore = create((set) => ({
     set((state) => ({
       matchedIDs: [...state.matchedIDs, firstMatchedID, secondMatchedID],
     })),
- 
+  highScore: getLocalStorage('highScore') ||  0,
+  setHighScore: (highScore) => set(() => {setLocalStorage('highScore', highScore)}) 
 }));
+
 
 export const useGameStore = useStore;
