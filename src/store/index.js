@@ -24,7 +24,19 @@ function generateCards() {
 const useStore = create(
   persist(
     (set) => ({
+      cards: [],
+      flippedIDs: [],
       gameActive: false,
+      gameComplete: false,
+      numberOfTurns: 0,
+      matchedIDs: [],
+      highScore: 0,
+     
+      resetGame: () => set({
+        matchedIDs: [],
+        cards: generateCards(),
+        numberOfTurns: 0,
+      }),
       setNewGame: () =>
         set({
           gameActive: true,
