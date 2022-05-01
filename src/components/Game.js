@@ -73,10 +73,11 @@ const Game = () => {
   const gameOver = matchedIDs.length === gameCards.length;
   const showScrim = gameOver || !gameActive;
 
-  if (gameOver && numberOfTurns > highScore) {
-    console.warn(numberOfTurns > highScore)
-    setHighScore(numberOfTurns);
-  }
+  useEffect(() => {
+    gameOver && numberOfTurns < highScore || highScore === 0 && setHighScore(numberOfTurns);
+    console.log(gameOver, numberOfTurns, highScore);
+  }, [gameOver]);
+
   console.warn("high score", highScore);
   return (
     <Container>
