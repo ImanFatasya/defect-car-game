@@ -70,13 +70,13 @@ const Game = () => {
   const setNewGame = useGameStore((state) => state.setNewGame);
   const setEndGame = useGameStore((state) => state.setEndGame);
 
-  const gameOver = matchedIDs.length === gameCards.length;
-  const showScrim = gameOver || !gameActive;
+  const gameComplete = matchedIDs.length === gameCards.length;
+  const showScrim = gameComplete || !gameActive;
 
   useEffect(() => {
-    gameOver && numberOfTurns < highScore || highScore === 0 && setHighScore(numberOfTurns);
-    console.log(gameOver, numberOfTurns, highScore);
-  }, [gameOver]);
+    gameComplete && numberOfTurns < highScore || highScore === 0 && setHighScore(numberOfTurns);
+    console.log(gameComplete, numberOfTurns, highScore);
+  }, [gameComplete]);
 
   console.warn("high score", highScore);
   return (
@@ -84,10 +84,10 @@ const Game = () => {
       <Header>
         <Button
           onClick={() => {
-            gameOver || !gameActive ? setNewGame() : setEndGame();
+            !gameComplete ? setNewGame() : setEndGame();
           }}
         >
-          {gameOver || !gameActive ? "Start New Game" : "End Game"}
+          {gameComplete ? "Start New Game" : "End Game"}
         </Button>
         <h1>Memory Game</h1>
         <NumberOfTurns numberOfTurns={numberOfTurns} />
@@ -101,13 +101,13 @@ const Game = () => {
         <Scrim
           onClick={() => {
             {
-              gameOver ? setEndGame() : setNewGame();
+              gameComplete ? setEndGame() : setNewGame();
             }
           }}
-          className="gameOverAnimation"
+          className="gameCompleteAnimation"
         >
-          <span>{gameOver ? "You Win!" : "Click anywhere to start"}</span>
-          {gameOver ? <ReactConfetti /> : <></>}
+          <span>{gameComplete ? "You Win!" : "Click anywhere to start"}</span>
+          {gameComplete ? <ReactConfetti /> : <></>}
         </Scrim>
       )}
     </Container>

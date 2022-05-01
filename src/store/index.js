@@ -6,7 +6,9 @@ function shuffleArray(arr) {
 }
 
 function generateCards() {
-  const colours = ["#FF5733"];
+  const colours = [
+    "#FF5733",
+  ];
 
   const pairs = colours.concat(colours);
   const shuffledParis = shuffleArray(pairs);
@@ -49,9 +51,11 @@ const useStore = create(
         })),
       highScore: 0,
       setHighScore: (numberOfTurns) => set({ highScore: numberOfTurns }),
+      gameComplete: false,
+      setGameComplete: () => set({ gameComplete: true, gameActive: false }),
     }),
     {
-      name: "game-storage", // unique name
+      name: "ame-storage", // unique name
     }
   )
 );

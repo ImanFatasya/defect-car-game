@@ -37,10 +37,10 @@
   }
 }
 
-.gameOverAnimation {
+.gameCompleteAnimation {
   display: flex;
 }
-.gameOverAnimation > span {
+.gameCompleteAnimation > span {
   animation: shake 0.5s infinite;
   font-size: 4rem;
   color: black;
