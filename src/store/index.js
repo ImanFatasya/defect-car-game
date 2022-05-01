@@ -40,11 +40,7 @@ const useStore = create(
       matchedIDs: [],
       highScore: 0,
      
-      resetGame: () => set({
-        matchedIDs: [],
-        cards: generateCards(),
-        numberOfTurns: 0,
-      }),
+   
       setNewGame: () =>
         set({
           gameActive: true,
