@@ -63,7 +63,6 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
       <CardFront
         key={`${id}_card-front`}
         style={{ opacity: opacity.to((o) => 1 - o), transform }}
-        backgroundColor="blue"
       />
     </CardContainer>
   );
