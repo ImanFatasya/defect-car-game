@@ -8,7 +8,14 @@ function shuffleArray(arr) {
 function generateCards() {
   const colours = [
     "#FF5733",
-
+    "#350e9e",
+    "#71f9ab",
+    "#78a188",
+    "#41535b",
+    "#fc2ba4",
+    "#89133d",
+    "#e9d1bb",
+    "#ed94be",
   ];
 
   const pairs = colours.concat(colours);
@@ -37,6 +44,8 @@ const useStore = create(
         set({
           gameActive: true,
           cards: generateCards(),
+          matchedIDs: [],
+          numberOfTurns: 0,
         }),
       setEndGame: () =>
         set({
@@ -57,7 +66,7 @@ const useStore = create(
       setGameComplete: () => set({ gameComplete: true, gameActive: false }),
     }),
     {
-      name: "ggggame-storage", // unique name
+      name: "2ggame-storage", // unique name
     }
   )
 );
