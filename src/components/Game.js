@@ -70,7 +70,7 @@ const Game = () => {
   const setNewGame = useGameStore((state) => state.setNewGame);
   const setEndGame = useGameStore((state) => state.setEndGame);
 
-  const gameComplete = matchedIDs.length === gameCards.length;
+  const gameComplete = matchedIDs.length === gameCards.length && gameActive;
   const showScrim = gameComplete || !gameActive;
 
   useEffect(() => {
