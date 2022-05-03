@@ -74,7 +74,8 @@ const Game = () => {
   const showScrim = gameComplete || !gameActive;
 
   useEffect(() => {
-    gameComplete && numberOfTurns < highScore || highScore === 0 && setHighScore(numberOfTurns);
+    (gameComplete && numberOfTurns < highScore) ||
+      (highScore === 0) && setHighScore(numberOfTurns);
     console.log(gameComplete, numberOfTurns, highScore);
   }, [gameComplete]);
 
