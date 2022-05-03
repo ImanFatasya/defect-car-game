@@ -52,6 +52,7 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
       }}
     >
       <CardBack
+        key={`${id}_card-back`}
         style={{
           opacity,
           transform,
@@ -60,6 +61,7 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
         backgroundColor={cardDetails.colour}
       />
       <CardFront
+        key={`${id}_card-front`}
         style={{ opacity: opacity.to((o) => 1 - o), transform }}
         backgroundColor="blue"
       />
@@ -81,7 +83,7 @@ const Cards = ({ gameCards }) => {
     //if less than two card have been flipped, add the card id to the flipped array for flipping (stops a third, fourth... card from flipping)
     flippedIDs.length < 2 &&
       !matchedIDs.find((matchedId) => matchedId === id) &&
-      setFlippedIDs(id) 
+      setFlippedIDs(id);
 
     //the next steps are for determining card match, so early return if only one card has been flipped
     if (flippedIDs.length < 1) {
@@ -102,7 +104,6 @@ const Cards = ({ gameCards }) => {
       setTimeout(() => {
         clearFlippedIDs();
         increaseNumberOfTurns();
-
       }, 1200);
     }
   };
