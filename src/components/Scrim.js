@@ -14,6 +14,15 @@ const StyledScrim = styled.div`
   align-items: center;
 `;
 
+const Label = styled.label`
+  font-size: 30px;
+  padding-bottom: 24px;
+`;
+
+const Input = styled.input`
+  padding: 10px;
+`;
+
 export const Scrim = ({ gameComplete }) => {
   const setNewGame = useGameStore((state) => state.setNewGame);
   const setEndGame = useGameStore((state) => state.setEndGame);
@@ -38,12 +47,12 @@ export const Scrim = ({ gameComplete }) => {
           }}
         >
           <div>
-            <label htmlFor="playername">Enter your name:</label>
-            <input
+            <Label htmlFor="playername">Enter your name</Label>
+            <Input
               type="text"
               value={value}
               onChange={(e) => setValue(e.target.value)}
-            ></input>
+            ></Input>
           </div>
         </form>
       )}

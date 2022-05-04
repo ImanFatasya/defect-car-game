@@ -20,7 +20,6 @@ function generateCards() {
 
   const pairs = colours.concat(colours);
   const shuffledParis = shuffleArray(pairs);
-  console.log("shuffling in Zustand");
 
   return shuffledParis.map((colour, i) => ({
     colour: colour,

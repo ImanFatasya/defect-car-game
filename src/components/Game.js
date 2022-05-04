@@ -69,11 +69,6 @@ const Game = () => {
     console.log(gameComplete, numberOfTurns, highScore);
   }, [gameComplete]);
 
-console.warn(gameActive, 'game active')
-console.warn(gameComplete, 'game complete')
-console.warn(showScrim, 'show scrim')
-
-
 return (
     <Container>
       <Header>
