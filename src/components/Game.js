@@ -67,11 +67,14 @@ const Game = () => {
     (gameComplete && numberOfTurns < highScore) ||
       (highScore === 0 && setHighScore(numberOfTurns));
     console.log(gameComplete, numberOfTurns, highScore);
-  }, [gameComplete, numberOfTurns, highScore, setHighScore]);
-  console.warn(showScrim, ' show scrim');
-  console.warn(gameActive, 'game active');
+  }, [gameComplete]);
 
-  return (
+console.warn(gameActive, 'game active')
+console.warn(gameComplete, 'game complete')
+console.warn(showScrim, 'show scrim')
+
+
+return (
     <Container>
       <Header>
         <Button
@@ -79,7 +82,7 @@ const Game = () => {
              setEndGame();
           }}
         >
-          {gameComplete ? "Start New Game" : "End Game"}
+          {gameComplete || !gameActive ? "Start New Game" : "End Game"}
         </Button>
         <h1>Memory Game</h1>
         <NumberOfTurns numberOfTurns={numberOfTurns} />
@@ -89,7 +92,6 @@ const Game = () => {
       <GameLayout>
         <Cards gameCards={gameCards} />
       </GameLayout>
-      <Scrim />
       {showScrim && <Scrim gameComplete={gameComplete} />}
     </Container>
   );

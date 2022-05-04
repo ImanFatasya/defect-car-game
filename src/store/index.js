@@ -63,7 +63,7 @@ const useStore = create(
       setPlayerName: (name) => set({ playerName: name})
     }),
     {
-      name: "game-storage7", // unique name
+      name: "game-storage20", // unique name
     }
   )
 );

@@ -22,19 +22,28 @@ export const Scrim = ({ gameComplete }) => {
 
   return (
     <StyledScrim
-    //   onClick={() => {
-    //     gameComplete && setEndGame();
-    //     // setNewGame();
-    //   }}
+      //   onClick={() => {
+      //     gameComplete && setEndGame();
+      //     // setNewGame();
+      //   }}
       className="gameCompleteAnimation"
     >
       {gameComplete ? (
         <span>You Win!</span>
       ) : (
-        <form onSubmit={() => setPlayerName(value)}>
+        <form
+          onSubmit={() => {
+            setPlayerName(value);
+            setNewGame();
+          }}
+        >
           <div>
             <label htmlFor="playername">Enter your name:</label>
-            <input type="text" value={value} onChange={(e) => setValue(e.target.value)}></input>
+            <input
+              type="text"
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+            ></input>
           </div>
         </form>
       )}
