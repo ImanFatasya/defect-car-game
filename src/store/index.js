@@ -10,12 +10,7 @@ function generateCards() {
     "#FF5733",
     "#350e9e",
     "#71f9ab",
-    "#78a188",
-    "#41535b",
-    "#fc2ba4",
-    "#89133d",
-    "#e9d1bb",
-    "#ed94be",
+
   ];
 
   const pairs = colours.concat(colours);
@@ -64,9 +59,11 @@ const useStore = create(
         })),
       setHighScore: (numberOfTurns) => set({ highScore: numberOfTurns }),
       setGameComplete: () => set({ gameComplete: true, gameActive: false }),
+      playerName: "",
+      setPlayerName: (name) => set({ playerName: name})
     }),
     {
-      name: "2ggame-storage", // unique name
+      name: "game-storage7", // unique name
     }
   )
 );

@@ -58,6 +58,7 @@ const Game = () => {
   const setHighScore = useGameStore((state) => state.setHighScore);
   const setNewGame = useGameStore((state) => state.setNewGame);
   const setEndGame = useGameStore((state) => state.setEndGame);
+  const playerName = useGameStore((state) => state.playerName);
 
   const gameComplete = matchedIDs.length === gameCards.length && gameActive;
   const showScrim = gameComplete || !gameActive;
@@ -67,13 +68,15 @@ const Game = () => {
       (highScore === 0 && setHighScore(numberOfTurns));
     console.log(gameComplete, numberOfTurns, highScore);
   }, [gameComplete, numberOfTurns, highScore, setHighScore]);
+  console.warn(showScrim, ' show scrim');
+  console.warn(gameActive, 'game active');
 
   return (
     <Container>
       <Header>
         <Button
           onClick={() => {
-            gameComplete ? setNewGame() : setEndGame();
+             setEndGame();
           }}
         >
           {gameComplete ? "Start New Game" : "End Game"}
@@ -81,10 +84,12 @@ const Game = () => {
         <h1>Memory Game</h1>
         <NumberOfTurns numberOfTurns={numberOfTurns} />
         <HighScore highScore={highScore} />
+        <p>Player: {playerName}</p>
       </Header>
       <GameLayout>
         <Cards gameCards={gameCards} />
       </GameLayout>
+      <Scrim />
       {showScrim && <Scrim gameComplete={gameComplete} />}
     </Container>
   );
