@@ -10,7 +10,12 @@ function generateCards() {
     "#FF5733",
     "#350e9e",
     "#71f9ab",
-
+    "#78a188",
+    "#41535b",
+    "#fc2ba4",
+    "#89133d",
+    "#e9d1bb",
+    "#ed94be",
   ];
 
   const pairs = colours.concat(colours);
