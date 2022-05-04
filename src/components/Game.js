@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
+import { useEffect } from "react";
 import Cards from "./Cards";
 import NumberOfTurns from "./NumberOfTurns";
 import HighScore from "./HighScore";
 import { useGameStore } from "../store";
 import "../App.css";
-import { ReactConfetti } from "../components/Confetti";
-import { useEffect } from "react";
+import { Scrim } from "./Scrim";
 
 const Container = styled.div`
   margin: auto;
@@ -49,17 +49,6 @@ const Button = styled.button`
   }
 `;
 
-const Scrim = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #c9cbca9e;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Game = () => {
   const gameActive = useGameStore((state) => state.gameActive);
   const gameCards = useGameStore((state) => state.cards);
@@ -75,11 +64,10 @@ const Game = () => {
 
   useEffect(() => {
     (gameComplete && numberOfTurns < highScore) ||
-      (highScore === 0) && setHighScore(numberOfTurns);
+      (highScore === 0 && setHighScore(numberOfTurns));
     console.log(gameComplete, numberOfTurns, highScore);
-  }, [gameComplete]);
+  }, [gameComplete, numberOfTurns, highScore, setHighScore]);
 
-  console.warn("high score", highScore);
   return (
     <Container>
       <Header>
@@ -94,23 +82,10 @@ const Game = () => {
         <NumberOfTurns numberOfTurns={numberOfTurns} />
         <HighScore highScore={highScore} />
       </Header>
-
       <GameLayout>
         <Cards gameCards={gameCards} />
       </GameLayout>
-      {showScrim && (
-        <Scrim
-          onClick={() => {
-            {
-              gameComplete ? setEndGame() : setNewGame();
-            }
-          }}
-          className="gameCompleteAnimation"
-        >
-          <span>{gameComplete ? "You Win!" : "Click anywhere to start"}</span>
-          {gameComplete ? <ReactConfetti /> : <></>}
-        </Scrim>
-      )}
+      {showScrim && <Scrim gameComplete={gameComplete} />}
     </Container>
   );
 };
