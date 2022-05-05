@@ -14,6 +14,10 @@ const StyledScrim = styled.div`
   align-items: center;
 `;
 
+const NameInput = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 const Label = styled.label`
   font-size: 30px;
   padding-bottom: 24px;
@@ -25,18 +29,11 @@ const Input = styled.input`
 
 export const Scrim = ({ gameComplete }) => {
   const setNewGame = useGameStore((state) => state.setNewGame);
-  const setEndGame = useGameStore((state) => state.setEndGame);
   const setPlayerName = useGameStore((state) => state.setPlayerName);
   const [value, setValue] = useState("");
 
   return (
-    <StyledScrim
-      //   onClick={() => {
-      //     gameComplete && setEndGame();
-      //     // setNewGame();
-      //   }}
-      className="gameCompleteAnimation"
-    >
+    <StyledScrim className="gameCompleteAnimation">
       {gameComplete ? (
         <span>You Win!</span>
       ) : (
@@ -46,14 +43,14 @@ export const Scrim = ({ gameComplete }) => {
             setNewGame();
           }}
         >
-          <div>
+          <NameInput>
             <Label htmlFor="playername">Enter your name</Label>
             <Input
               type="text"
               value={value}
               onChange={(e) => setValue(e.target.value)}
             ></Input>
-          </div>
+          </NameInput>
         </form>
       )}
       {gameComplete ? <ReactConfetti /> : <></>}

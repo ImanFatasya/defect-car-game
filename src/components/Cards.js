@@ -68,7 +68,7 @@ const Card = ({ flipped, cardDetails, onCardClick, id, flippedIDs }) => {
   );
 };
 
-const Cards = ({ gameCards }) => {
+export const Cards = ({ gameCards }) => {
   const increaseNumberOfTurns = useGameStore(
     (state) => state.increaseNumberOfTurns
   );
@@ -124,4 +124,4 @@ const Cards = ({ gameCards }) => {
   });
 };
 
-export default Cards;
+

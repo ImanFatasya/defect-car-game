@@ -5,7 +5,7 @@ const Number = styled.span`
 `;
 
 
-const HighScore = ({ highScore }) => {
+export const HighScore = ({ highScore }) => {
   return (
     <div>
       <p>
@@ -14,5 +14,3 @@ const HighScore = ({ highScore }) => {
     </div>
   );
 };
-
-export default HighScore;

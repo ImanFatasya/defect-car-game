@@ -5,7 +5,7 @@ const Number = styled.span`
 `;
 
 
-const NumberOfTurns = ({ numberOfTurns }) => {
+export const NumberOfTurns = ({ numberOfTurns }) => {
   return (
     <div>
       <p>
@@ -15,4 +15,3 @@ const NumberOfTurns = ({ numberOfTurns }) => {
   );
 };
 
-export default NumberOfTurns;

@@ -1,10 +1,10 @@
-import styled from "@emotion/styled";
 import { useEffect } from "react";
-import Cards from "./Cards";
-import NumberOfTurns from "./NumberOfTurns";
-import HighScore from "./HighScore";
-import { useGameStore } from "../store";
+import styled from "@emotion/styled";
 import "../App.css";
+import { Cards } from "./Cards";
+import { NumberOfTurns } from "./NumberOfTurns";
+import { HighScore } from "./HighScore";
+import { useGameStore } from "../store";
 import { Scrim } from "./Scrim";
 
 const Container = styled.div`
@@ -56,7 +56,6 @@ const Game = () => {
   const matchedIDs = useGameStore((state) => state.matchedIDs);
   const highScore = useGameStore((state) => state.highScore);
   const setHighScore = useGameStore((state) => state.setHighScore);
-  const setNewGame = useGameStore((state) => state.setNewGame);
   const setEndGame = useGameStore((state) => state.setEndGame);
   const playerName = useGameStore((state) => state.playerName);
 
@@ -67,14 +66,14 @@ const Game = () => {
     (gameComplete && numberOfTurns < highScore) ||
       (highScore === 0 && setHighScore(numberOfTurns));
     console.log(gameComplete, numberOfTurns, highScore);
-  }, [gameComplete]);
+  }, [gameComplete, numberOfTurns, highScore, setHighScore]);
 
-return (
+  return (
     <Container>
       <Header>
         <Button
           onClick={() => {
-             setEndGame();
+            setEndGame();
           }}
         >
           {gameComplete || !gameActive ? "Start New Game" : "End Game"}
@@ -82,7 +81,7 @@ return (
         <h1>Memory Game</h1>
         <NumberOfTurns numberOfTurns={numberOfTurns} />
         <HighScore highScore={highScore} />
-        <p>Player: {playerName}</p>
+        <p>Player:  {playerName}</p>
       </Header>
       <GameLayout>
         <Cards gameCards={gameCards} />
