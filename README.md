@@ -1,7 +1,7 @@
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://cool-vacherin-fe385b.netlify.app">
-    Play game here (Still under construction)
+    Play game here
   </a>
 </p>
 <h1 align="center">
