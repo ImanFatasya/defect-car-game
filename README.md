@@ -42,6 +42,3 @@ visit http://localhost:3000
 ```
 
 
-
-Izabelle Wilding - izabellewilding@gmail.com
-
