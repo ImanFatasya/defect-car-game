@@ -9,8 +9,9 @@ Memory Card Game</h1>
 
 <p align="center">A memory card game built with React, Zustand, and Emotion.</p>
 
+<img width="1428" alt="image" src="https://user-images.githubusercontent.com/52497996/167380863-9cd3d67f-191a-47f8-aebf-0bb5e62d3635.png">
 
-![Site-screenshot](src/assets/game-rec.mov)
+
 
 <!-- TECH -->
 ## Built With
