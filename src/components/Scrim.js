@@ -32,10 +32,33 @@ export const Scrim = ({ gameComplete }) => {
   const setPlayerName = useGameStore((state) => state.setPlayerName);
   const [value, setValue] = useState("");
 
+  const numberOfTurns = useGameStore((state) => state.numberOfTurns);
+  const highScore = useGameStore((state) => state.highScore);
+  const setHighScore = useGameStore((state) => state.setHighScore);
+
   return (
     <StyledScrim className="gameCompleteAnimation">
       {gameComplete ? (
-        <span>You Win!</span>
+        <>
+          <span>You Win!</span>
+          <button
+            onClick={() => {
+              if (highScore) {
+                setHighScore(numberOfTurns);
+              }
+
+              if (gameComplete) {
+                if (numberOfTurns < highScore || highScore === 0) {
+                  setHighScore(numberOfTurns);
+                }
+              }
+              setNewGame();
+            }}
+          >
+            {" "}
+            Play again{" "}
+          </button>
+        </>
       ) : (
         <form
           onSubmit={() => {

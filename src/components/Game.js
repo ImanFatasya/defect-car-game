@@ -62,15 +62,6 @@ const Game = () => {
   const gameComplete = matchedIDs.length === gameCards.length && gameActive;
   const showScrim = gameComplete || !gameActive;
 
-  useEffect(() => {
-    (gameComplete && numberOfTurns < highScore) ||
-      (highScore === 0 && setHighScore(numberOfTurns));
-    console.log(gameComplete, numberOfTurns, highScore);
-    if (highScore < numberOfTurns) {
-      setHighScore(numberOfTurns);
-    }
-  }, [gameComplete, numberOfTurns, highScore, setHighScore]);
-
   return (
     <Container>
       <Header>
@@ -84,7 +75,7 @@ const Game = () => {
         <h1>Memory Game</h1>
         <NumberOfTurns numberOfTurns={numberOfTurns} />
         <HighScore highScore={highScore} />
-        <p>Player:  {playerName}</p>
+        <p>Player: {playerName}</p>
       </Header>
       <GameLayout>
         <Cards gameCards={gameCards} />
