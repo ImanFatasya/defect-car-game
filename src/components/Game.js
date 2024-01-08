@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import styled from "@emotion/styled";
 import "../App.css";
 import { Cards } from "./Cards";
@@ -55,7 +54,6 @@ const Game = () => {
   const numberOfTurns = useGameStore((state) => state.numberOfTurns);
   const matchedIDs = useGameStore((state) => state.matchedIDs);
   const highScore = useGameStore((state) => state.highScore);
-  const setHighScore = useGameStore((state) => state.setHighScore);
   const setEndGame = useGameStore((state) => state.setEndGame);
   const playerName = useGameStore((state) => state.playerName);
 
