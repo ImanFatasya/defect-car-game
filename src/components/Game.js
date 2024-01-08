@@ -66,6 +66,9 @@ const Game = () => {
     (gameComplete && numberOfTurns < highScore) ||
       (highScore === 0 && setHighScore(numberOfTurns));
     console.log(gameComplete, numberOfTurns, highScore);
+    if (highScore < numberOfTurns) {
+      setHighScore(numberOfTurns);
+    }
   }, [gameComplete, numberOfTurns, highScore, setHighScore]);
 
   return (
