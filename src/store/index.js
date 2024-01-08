@@ -51,6 +51,9 @@ const useStore = create(
           matchedIDs: [],
           numberOfTurns: 0,
           gameActive: false,
+          highScore: 0,
+          flippedIDs: [],
+          playerName: "",
         }),
       setFlippedIDs: (flippedID) =>
         set((state) => ({ flippedIDs: [...state.flippedIDs, flippedID] })),
@@ -62,9 +65,13 @@ const useStore = create(
           matchedIDs: [...state.matchedIDs, firstMatchedID, secondMatchedID],
         })),
       setHighScore: (numberOfTurns) => set({ highScore: numberOfTurns }),
-      setGameComplete: () => set({ gameComplete: true, gameActive: false }),
+      setGameComplete: () =>
+        set((state) => ({
+          gameComplete: true,
+          gameActive: false,
+        })),
       playerName: "",
-      setPlayerName: (name) => set({ playerName: name})
+      setPlayerName: (name) => set({ playerName: name }),
     }),
     {
       name: "game-storage20", // unique name
