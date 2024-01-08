@@ -3,6 +3,25 @@ import { useState } from "react";
 import { ReactConfetti } from "../components/Confetti";
 import { useGameStore } from "../store";
 
+const GameEndCTA = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const GameEndButton = styled.div`
+  background-color: cornflowerblue;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  z-index: 1;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #2559b7;
+  }
+`;
+
 const StyledScrim = styled.div`
   position: absolute;
   top: 0;
@@ -39,9 +58,9 @@ export const Scrim = ({ gameComplete }) => {
   return (
     <StyledScrim className="gameCompleteAnimation">
       {gameComplete ? (
-        <>
-          <span>You Win!</span>
-          <button
+        <GameEndCTA>
+          <h1>Nice work!</h1>
+          <GameEndButton
             onClick={() => {
               if (highScore) {
                 setHighScore(numberOfTurns);
@@ -55,10 +74,9 @@ export const Scrim = ({ gameComplete }) => {
               setNewGame();
             }}
           >
-            {" "}
-            Play again{" "}
-          </button>
-        </>
+            Play again
+          </GameEndButton>
+        </GameEndCTA>
       ) : (
         <form
           onSubmit={() => {
