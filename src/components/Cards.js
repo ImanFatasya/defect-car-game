@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+/*import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useSpring, animated as a } from "react-spring";
 import { useGameStore } from "../store";
@@ -122,6 +122,84 @@ export const Cards = ({ gameCards }) => {
       />
     );
   });
+};*/
+
+import styled from "@emotion/styled";
+import { useState } from "react";
+import { useGameStore } from "../store";
+import { motion } from "framer-motion";
+
+const CardContainer = styled.div`
+  width: 100%;
+  max-width: 160px;
+  height: 160px;
+  position: relative;
+  cursor: pointer;
+`;
+
+const CardImage = styled(motion.img)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+`;
+
+const BangLabel = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: red;
+  color: white;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 6px;
+  animation: pop 0.6s ease-in-out;
+  @keyframes pop {
+    0% { transform: scale(1); opacity: 0; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 0; }
+  }
+`;
+
+const Card = ({ cardDetails, onClick, showBang }) => (
+  <CardContainer onClick={onClick}>
+    <CardImage
+      src={cardDetails.src}
+      alt="car"
+      highlight={cardDetails.defective}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    />
+    {showBang && <BangLabel>BANG! WRONG</BangLabel>}
+  </CardContainer>
+);
+
+export const Cards = ({ gameCards }) => {
+  const increaseNumberOfTurns = useGameStore((s) => s.increaseNumberOfTurns);
+  const setDefectFound = useGameStore((s) => s.setDefectFound);
+  const defectFound = useGameStore((s) => s.defectFound);
+
+  const [bangID, setBangID] = useState(null);
+
+  const onCardClick = (card) => {
+    if (defectFound) return;
+    if (card.defective) {
+      setDefectFound();
+    } else {
+      setBangID(card.id);
+      increaseNumberOfTurns();
+      setTimeout(() => setBangID(null), 600);
+    }
+  };
+
+  return gameCards.map((card) => (
+    <Card
+      key={card.id}
+      cardDetails={card}
+      onClick={() => onCardClick(card)}
+      showBang={bangID === card.id}
+    />
+  ));
 };
-
-

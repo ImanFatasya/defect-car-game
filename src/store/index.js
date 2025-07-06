@@ -1,4 +1,4 @@
-import create from "zustand";
+/*import create from "zustand";
 import { persist } from "zustand/middleware";
 
 function shuffleArray(arr) {
@@ -76,6 +76,69 @@ const useStore = create(
     {
       name: "game-storage20", // unique name
     }
+  )
+);
+
+export const useGameStore = useStore;*/
+
+// === store/index.js ===
+import create from "zustand";
+import { persist } from "zustand/middleware";
+
+function shuffleArray(arr) {
+  return arr.sort(() => Math.random() - 0.5);
+}
+
+function generateCarImages() {
+  const normalCars = [
+    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false }
+  ];
+  const defectCar = [
+    { src: "https://cash-4-cars.com.au/wp-content/uploads/2023/02/Get-Top-Cash-for-Your-Honda-at-Honda-Wreckers-Adelaide.png", defective: true }
+  ];
+
+  return shuffleArray([...normalCars, ...defectCar]).map((img, i) => ({
+    ...img,
+    id: i
+  }));
+}
+
+const useStore = create(
+  persist(
+    (set) => ({
+      cards: [],
+      gameActive: false,
+      defectFound: false,
+      numberOfTurns: 0,
+      playerName: "",
+      setNewGame: () =>
+        set({
+          gameActive: true,
+          cards: generateCarImages(),
+          numberOfTurns: 0,
+          defectFound: false,
+        }),
+      setEndGame: () =>
+        set({
+          gameActive: false,
+          defectFound: false,
+          numberOfTurns: 0,
+          playerName: ""
+        }),
+      setDefectFound: () => set({ defectFound: true }),
+      increaseNumberOfTurns: () =>
+        set((state) => ({ numberOfTurns: state.numberOfTurns + 1 })),
+      setPlayerName: (name) => set({ playerName: name }),
+    }),
+    { name: "defect-finder-game" }
   )
 );
 
