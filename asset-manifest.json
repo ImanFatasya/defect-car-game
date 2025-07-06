@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/defect-car-game/static/css/main.7321bb44.css",
+    "main.js": "/defect-car-game/static/js/main.d4427d49.js",
+    "static/js/787.0c9b608a.chunk.js": "/defect-car-game/static/js/787.0c9b608a.chunk.js",
+    "index.html": "/defect-car-game/index.html",
+    "main.7321bb44.css.map": "/defect-car-game/static/css/main.7321bb44.css.map",
+    "main.d4427d49.js.map": "/defect-car-game/static/js/main.d4427d49.js.map",
+    "787.0c9b608a.chunk.js.map": "/defect-car-game/static/js/787.0c9b608a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7321bb44.css",
+    "static/js/main.d4427d49.js"
+  ]
+}
