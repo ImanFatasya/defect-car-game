@@ -92,14 +92,14 @@ function shuffleArray(arr) {
 function generateCarImages() {
   const normalCars = [
     { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
-    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
-    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
-    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
-    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
-    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
-    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
-    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false },
-    { src: "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg", defective: false }
+    { src: "https://cdn.pixabay.com/photo/2017/03/27/14/56/auto-2179220_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2016/09/11/16/47/car-1661767_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2017/12/07/08/34/traffic-3003409_1280.png", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2016/11/29/10/01/vw-bulli-1868890_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2015/06/03/13/38/plymouth-796441_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2016/11/22/23/55/car-1851299_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2016/12/03/11/47/car-1879630_1280.jpg", defective: false },
+    { src: "https://cdn.pixabay.com/photo/2017/07/01/08/46/clio-2460877_1280.jpg", defective: false }
   ];
   const defectCar = [
     { src: "https://cash-4-cars.com.au/wp-content/uploads/2023/02/Get-Top-Cash-for-Your-Honda-at-Honda-Wreckers-Adelaide.png", defective: true }
@@ -110,6 +110,7 @@ function generateCarImages() {
     id: i
   }));
 }
+
 
 const useStore = create(
   persist(
